@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">VoterReach</string>
+    <string name="action_settings">Settings</string>
+    <string name="Name"> Joe Shmoe</string>
+    <string name="Button"> Call Voter</string>
+    <string name="Voting"> Voting?</string>
+    <string name="No_Answer"> No Answer</string>
+    <string name="Volunteer"> Volunteer</string>
+
+    <string-array name= "Volunteering">
+        <item> Volunteer?</item>
+        <item> Host a House Party!</item>
+        <item> Canvassing</item>
+        <item> Phone Banking</item>
+        <item> Donating</item>
+        <item> No </item>
+    </string-array>
+</resources>
