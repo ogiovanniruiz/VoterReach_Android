@@ -5,7 +5,7 @@
     <string name="Button"> Call Voter</string>
     <string name="Voting"> Voting?</string>
     <string name="No_Answer"> No Answer</string>
-    <string name="Volunteer"> Volunteer</string>
+    <string name="Button2"> Save</string>
 
     <string-array name= "Volunteering">
         <item> Volunteer?</item>
