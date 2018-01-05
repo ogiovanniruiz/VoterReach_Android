@@ -23,6 +23,8 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 
+
+
 public class LoginActivity extends AppCompatActivity{
 
     public static final int CONNECTION_TIMEOUT=10000;
@@ -46,7 +48,7 @@ public class LoginActivity extends AppCompatActivity{
     // Triggers when LOGIN Button clicked
     public void checkLogin(View arg0) {
 
-        // Get text from email and passord field
+        // Get text from user, password and Campaign Code fields.
         final String user = etUser.getText().toString();
         final String password = etPassword.getText().toString();
         final String code = etCode.getText().toString();
@@ -77,8 +79,12 @@ public class LoginActivity extends AppCompatActivity{
         protected String doInBackground(String... params) {
             try {
 
+                String pre_url = "http://epicentermagazine.org/";
+
+                pre_url = pre_url + params[2] + ".inc.php";
+
                 // Enter URL address where your php file resides
-                url = new URL("http://epicentermagazine.org/login1.inc.php");
+                url = new URL(pre_url);
 
             } catch (MalformedURLException e) {
                 // TODO Auto-generated catch block
@@ -158,7 +164,6 @@ public class LoginActivity extends AppCompatActivity{
         protected void onPostExecute(String result) {
 
             //this method will be running on UI thread
-            Toast.makeText(LoginActivity.this, result, Toast.LENGTH_LONG).show();
 
             pdLoading.dismiss();
 
@@ -167,7 +172,6 @@ public class LoginActivity extends AppCompatActivity{
                 /* Here launching another activity when login successful. If you persist login state
                 use sharedPreferences of Android. and logout button to clear sharedPreferences.*/
 
-                System.out.println(result);
                 Intent intent = new Intent(LoginActivity.this,CallActivity.class);
                 startActivity(intent);
                 LoginActivity.this.finish();

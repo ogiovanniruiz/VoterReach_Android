@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.voterreach.ogruiz.voterreach">
 
+    <uses-permission android:name="android.permission.CALL_PHONE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -24,6 +25,9 @@
         <activity
             android:name="com.voterreach.ogruiz.voterreach.CallActivity"
             android:theme="@style/AppTheme.NoActionBar">
+        </activity>
+        <activity
+            android:name="com.voterreach.ogruiz.voterreach.SaveActivity">
         </activity>
 
 

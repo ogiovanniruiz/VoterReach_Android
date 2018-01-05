@@ -7,64 +7,143 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.widget.Spinner;
-import android.widget.ArrayAdapter;
-
-import android.widget.AdapterView;
-import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-
-import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
 
-public class CallActivity extends AppCompatActivity{
+
+public class SaveActivity extends AppCompatActivity{
     public static final int CONNECTION_TIMEOUT=10000;
     public static final int READ_TIMEOUT=15000;
 
+    private String isVoting = "N";
+    private String isDonating = "N";
+    private String isParty = "N";
+    private String isCanvass = "N";
+    private String noAnswer = "N";
+    private String badNumber = "N";
+    private String contacted = "N";
     private String primary_id;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_call);
+        setContentView(R.layout.activity_save);
 
-        new RequestCall().execute();
+        primary_id = getIntent().getStringExtra("PRIMARY_ID");
 
     }
 
-    private class RequestCall extends AsyncTask<String, String, String>{
+    public void checkVote(View arg0) {
 
-        ProgressDialog pdLoading = new ProgressDialog(CallActivity.this);
+        if (isVoting.equals("Y")) {
+            isVoting = "N";
+        }
+        else
+        {
+            isVoting = "Y";
+        }
+    }
+
+    public void checkParty(View arg0) {
+        if (isParty.equals("Y")) {
+            isParty = "N";
+        }
+        else
+        {
+            isParty = "Y";
+        }
+    }
+
+    public void checkCanvass(View arg0) {
+        if (isCanvass.equals("Y")) {
+            isCanvass= "N";
+        }
+        else
+        {
+            isCanvass = "Y";
+        }
+    }
+
+    public void checkDonate(View arg0) {
+        if (isDonating.equals("Y")) {
+            isDonating = "N";
+        }
+        else
+        {
+            isDonating = "Y";
+        }
+    }
+
+    public void noAnswer(View arg0) {
+        if (noAnswer.equals("Y")) {
+            noAnswer = "N";
+        }
+        else
+        {
+            noAnswer = "Y";
+        }
+    }
+
+    public void badNumber(View arg0) {
+        if (badNumber.equals("Y")) {
+            badNumber = "N";
+        }
+        else
+        {
+            badNumber = "Y";
+        }
+    }
+
+    public void contacted(View arg0) {
+        if (contacted.equals("Y")) {
+            contacted = "N";
+        }
+        else
+        {
+            contacted = "Y";
+        }
+    }
+
+    public void checkSave(View arg0) {
+
+        new SaveData().execute(isVoting, isDonating, isParty, isCanvass, noAnswer, badNumber, contacted, primary_id);
+    }
+
+    private class SaveData extends AsyncTask<String, String, String> {
+
+        ProgressDialog pdLoading = new ProgressDialog(SaveActivity.this);
         HttpURLConnection conn;
         URL url = null;
+
 
         protected void onPreExecute() {
 
             super.onPreExecute();
 
             //this method will be running on UI thread
-            pdLoading.setMessage("\tGetting New Voter...");
+            pdLoading.setMessage("\tSaving to Database...");
             pdLoading.setCancelable(false);
             pdLoading.show();
-
         }
 
         protected String doInBackground(String... params) {
-
             try {
 
                 // Enter URL address where your php file resides
-                url = new URL("http://epicentermagazine.org/1234.echo2.php");
+                url = new URL("http://epicentermagazine.org/1234.response.write.php");
 
 
             } catch (MalformedURLException e) {
@@ -86,9 +165,14 @@ public class CallActivity extends AppCompatActivity{
 
                 // Append parameters to URL
                 Uri.Builder builder = new Uri.Builder()
-                        .appendQueryParameter("v1_voternam", "v1_voternae")
-                        .appendQueryParameter("phonenumbe", "phonenumbe")
-                        .appendQueryParameter("v1_primaryi", "v1_primaryd");
+                        .appendQueryParameter("voting", params[0])
+                        .appendQueryParameter("donate", params[1])
+                        .appendQueryParameter("host_party", params[2])
+                        .appendQueryParameter("canvass", params[3])
+                        .appendQueryParameter("no_answer", params[4])
+                        .appendQueryParameter("bad_number", params[5])
+                        .appendQueryParameter("contacted", params[6])
+                        .appendQueryParameter("v1_primaryid", params[7]);
 
                 String query = builder.build().getEncodedQuery();
 
@@ -143,38 +227,23 @@ public class CallActivity extends AppCompatActivity{
             }
         }
 
-        protected void onPostExecute(String result) {
-
+        protected void onPostExecute(String result){
             pdLoading.dismiss();
-            String delims = "[,]";
-            String[] tokens = result.split(delims);
-            Toast.makeText(CallActivity.this, tokens[0], Toast.LENGTH_LONG).show();
 
-            final TextView voterNameTextView = (TextView) findViewById(R.id.textView);
+            Toast.makeText(SaveActivity.this, result, Toast.LENGTH_LONG).show();
 
-            primary_id = tokens[2];
-            voterNameTextView.setText(tokens[0]);
+            if(result.equalsIgnoreCase("successful")) {
 
+                Intent intent = new Intent(SaveActivity.this, CallActivity.class);
+                startActivity(intent);
+                SaveActivity.this.finish();
+            }
+
+            else{
+
+                Toast.makeText(SaveActivity.this, "Nope.", Toast.LENGTH_LONG).show();
+            }
         }
-    }
-
-    // Triggers when LOGIN Button clicked
-    public void CallButton(View arg0) {
-
-        // Initialize  AsyncLogin() class with email and password
-        Toast.makeText(CallActivity.this, "Calling Voter...", Toast.LENGTH_LONG).show();
-
-    }
-
-    // Triggers when LOGIN Button clicked
-    public void SurveyButton(View arg0) {
-
-        // Initialize  AsyncLogin() class with email and password
-        Intent intent = new Intent(CallActivity.this,SaveActivity.class);
-
-        intent.putExtra("PRIMARY_ID", primary_id);
-        startActivity(intent);
-        CallActivity.this.finish();
 
     }
 
