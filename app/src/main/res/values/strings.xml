@@ -6,21 +6,13 @@
     <string name="CallButton"> Call Voter</string>
     <string name="EnterButton"> Enter Survey</string>
 
-    <string name="Voting"> Will Vote</string>
-    <string name="No_Answer"> Did not Answer</string>
-    <string name="Party"> Host a house party</string>
-    <string name="Canvassing"> Canvassing</string>
-    <string name="Donate"> Donate</string>
-    <string name="Bad_Number"> Bad Number</string>
-    <string name="Contacted"> Contacted</string>
+    <string name="Bad_Number"> Bad Number </string>
+    <string name="No_Answer"> No Answer</string>
     <string name="Save"> Save</string>
 
-    <string-array name= "Volunteering">
-        <item> Volunteer?</item>
-        <item> Host a House Party!</item>
-        <item> Canvassing</item>
-        <item> Phone Banking</item>
-        <item> Donating</item>
-        <item> No </item>
-    </string-array>
+    <string name="pref_previously_started"> Save</string>
+    <string name="pref_pbuuid"> UUID</string>
+    <string name="pref_code"> code</string>
+    <string name="pref_voterid"> voter</string>
+
 </resources>

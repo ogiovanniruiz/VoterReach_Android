@@ -2,15 +2,14 @@ package com.voterreach.ogruiz.voterreach;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.widget.Spinner;
-import android.widget.ArrayAdapter;
 
-import android.widget.AdapterView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -31,15 +30,26 @@ public class CallActivity extends AppCompatActivity{
     public static final int CONNECTION_TIMEOUT=10000;
     public static final int READ_TIMEOUT=15000;
 
-    private String primary_id;
+    private String voterid;
+    private String pbuuid;
+    private String campaign_code;
+    private SharedPreferences prefs;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_call);
 
-        new RequestCall().execute();
+        prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
 
+        pbuuid = prefs.getString(getString(R.string.pref_pbuuid), "DEFAULT");
+        campaign_code = prefs.getString(getString(R.string.pref_code), "DEFAULT");
+
+        final String code = campaign_code;
+        final String id = pbuuid;
+
+        new RequestCall().execute(code, id);
     }
 
     private class RequestCall extends AsyncTask<String, String, String>{
@@ -64,7 +74,7 @@ public class CallActivity extends AppCompatActivity{
             try {
 
                 // Enter URL address where your php file resides
-                url = new URL("http://epicentermagazine.org/1234.echo2.php");
+                url = new URL("http://voterreach.org/cgi-bin/call.php");
 
 
             } catch (MalformedURLException e) {
@@ -86,9 +96,8 @@ public class CallActivity extends AppCompatActivity{
 
                 // Append parameters to URL
                 Uri.Builder builder = new Uri.Builder()
-                        .appendQueryParameter("v1_voternam", "v1_voternae")
-                        .appendQueryParameter("phonenumbe", "phonenumbe")
-                        .appendQueryParameter("v1_primaryi", "v1_primaryd");
+                        .appendQueryParameter("campaigncode", params[0])
+                        .appendQueryParameter("pbuuid", params[1]);
 
                 String query = builder.build().getEncodedQuery();
 
@@ -146,14 +155,26 @@ public class CallActivity extends AppCompatActivity{
         protected void onPostExecute(String result) {
 
             pdLoading.dismiss();
-            String delims = "[,]";
-            String[] tokens = result.split(delims);
-            Toast.makeText(CallActivity.this, tokens[0], Toast.LENGTH_LONG).show();
 
-            final TextView voterNameTextView = (TextView) findViewById(R.id.textView);
+            if (result.equalsIgnoreCase("\uFEFFfalse")){
 
-            primary_id = tokens[2];
-            voterNameTextView.setText(tokens[0]);
+                Toast.makeText(CallActivity.this, "Could not Retrieve Voter Data.", Toast.LENGTH_LONG).show();
+
+            }
+
+            else {
+
+                System.out.println(result);
+                String delims = "[,]";
+                String[] voter_data = result.split(delims);
+
+                final TextView voterNameTextView = (TextView) findViewById(R.id.textView);
+                String fullname = voter_data[0] + " " + voter_data[1];
+
+                voterNameTextView.setText(fullname);
+
+                voterid = voter_data[3];
+            }
 
         }
     }
@@ -169,10 +190,12 @@ public class CallActivity extends AppCompatActivity{
     // Triggers when LOGIN Button clicked
     public void SurveyButton(View arg0) {
 
-        // Initialize  AsyncLogin() class with email and password
-        Intent intent = new Intent(CallActivity.this,SaveActivity.class);
+        SharedPreferences.Editor edit = prefs.edit();
+        edit.putString(getString(R.string.pref_voterid), voterid);
+        edit.apply();
 
-        intent.putExtra("PRIMARY_ID", primary_id);
+        // Initialize  AsyncLogin() class with email and password
+        Intent intent = new Intent(CallActivity.this,SurveyActivity.class);
         startActivity(intent);
         CallActivity.this.finish();
 

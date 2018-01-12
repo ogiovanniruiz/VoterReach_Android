@@ -5,9 +5,9 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -22,49 +22,54 @@ import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.UUID;
 
 
-public class LoginActivity extends AppCompatActivity{
+public class RegistrationActivity extends AppCompatActivity{
 
     public static final int CONNECTION_TIMEOUT=10000;
     public static final int READ_TIMEOUT=15000;
-    private EditText etCode;
+    private EditText etUserName;
     private String uniqueid;
     private SharedPreferences prefs;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
 
         prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+        boolean previouslyStarted = prefs.getBoolean(getString(R.string.pref_previously_started), false);
 
-        // Get Reference to variables
-        uniqueid = prefs.getString(getString(R.string.pref_pbuuid), "DEFAULT");
-        etCode = (EditText) findViewById(R.id.code);
+        if (previouslyStarted){
+
+            Intent intent = new Intent(RegistrationActivity.this,LoginActivity.class);
+            startActivity(intent);
+            RegistrationActivity.this.finish();
+
+        }
+
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_registration);
+
+        uniqueid = UUID.randomUUID().toString();
+        etUserName = (EditText) findViewById(R.id.username);
+
     }
-
     // Triggers when LOGIN Button clicked
     public void checkLogin(View arg0) {
 
         // Get text from user, password and Campaign Code fields.
-        final String code = etCode.getText().toString();
+        final String code = etUserName.getText().toString();
         final String id = uniqueid;
 
-        SharedPreferences.Editor edit = prefs.edit();
-        edit.putString(getString(R.string.pref_code), code);
-        edit.apply();
-
         // Initialize  AsyncLogin() class with email and password
-        new AsyncLogin().execute(code, id);
+        new AsyncLogin().execute(id, code);
 
     }
 
     private class AsyncLogin extends AsyncTask<String, String, String>
     {
 
-        ProgressDialog pdLoading = new ProgressDialog(LoginActivity.this);
+        ProgressDialog pdLoading = new ProgressDialog(RegistrationActivity.this);
         HttpURLConnection conn;
         URL url = null;
 
@@ -83,7 +88,7 @@ public class LoginActivity extends AppCompatActivity{
             try {
 
                 // Enter URL address where your php file resides
-                url = new URL("http://voterreach.org/cgi-bin/login.php");
+                url = new URL( "http://voterreach.org/cgi-bin/register.php");
 
             } catch (MalformedURLException e) {
                 // TODO Auto-generated catch block
@@ -103,8 +108,8 @@ public class LoginActivity extends AppCompatActivity{
 
                 // Append parameters to URL
                 Uri.Builder builder = new Uri.Builder()
-                        .appendQueryParameter("campaigncode", params[0])
-                        .appendQueryParameter("pbuuid", params[1]);
+                        .appendQueryParameter("pbuuid", params[0])
+                        .appendQueryParameter("pbname", params[1]);
 
                 String query = builder.build().getEncodedQuery();
 
@@ -165,30 +170,32 @@ public class LoginActivity extends AppCompatActivity{
 
             pdLoading.dismiss();
 
-            String delims = "[,]";
-            String[] response = result.split(delims, 2);
+            Toast.makeText(RegistrationActivity.this, result, Toast.LENGTH_LONG).show();
 
-            if (result.equalsIgnoreCase("\uFEFFfalse")){
+
+            if(result.equalsIgnoreCase("\uFEFFtrue"))
+            {
+                /* Here launching another activity when login successful. If you persist login state
+                use sharedPreferences of Android. and logout button to clear sharedPreferences.*/
+
+                SharedPreferences.Editor edit = prefs.edit();
+                edit.putBoolean(getString(R.string.pref_previously_started), Boolean.TRUE);
+                edit.putString(getString(R.string.pref_pbuuid), uniqueid);
+                edit.apply();
+
+                Intent intent = new Intent(RegistrationActivity.this,LoginActivity.class);
+                startActivity(intent);
+                RegistrationActivity.this.finish();
+            }
+            else if (result.equalsIgnoreCase("\uFEFF\uFEFFfalse")){
 
                 // If username and password does not match display a error message
-                Toast.makeText(LoginActivity.this, "You connected but have Invalid Campaign Code.", Toast.LENGTH_LONG).show();
+                Toast.makeText(RegistrationActivity.this, "You connected but but there was an issue with database.", Toast.LENGTH_LONG).show();
 
             }
             else if (result.equalsIgnoreCase("exception") || result.equalsIgnoreCase("unsuccessful"))
             {
-                Toast.makeText(LoginActivity.this, "You have MASSIVE Connection Problems.", Toast.LENGTH_LONG).show();
-            }
-
-            else if (response[0].equalsIgnoreCase("\uFEFFtrue")){
-
-                Intent intent = new Intent(LoginActivity.this,CallActivity.class);
-                SharedPreferences.Editor edit = prefs.edit();
-                edit.putString("Questions", response[1]);
-                edit.apply();
-
-                startActivity(intent);
-                LoginActivity.this.finish();
-
+                Toast.makeText(RegistrationActivity.this, "You have MASSIVE Connection Problems.", Toast.LENGTH_LONG).show();
             }
         }
     }
