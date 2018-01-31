@@ -16,20 +16,23 @@
         android:theme="@style/AppTheme">
 
         <activity android:name="com.voterreach.ogruiz.voterreach.LoginActivity"
-            android:label="@string/app_name">
-
+            android:label="@string/app_name"
+            android:screenOrientation="portrait">
 
 
         </activity>
         <activity
             android:name="com.voterreach.ogruiz.voterreach.CallActivity"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/AppTheme.NoActionBar"
+            android:screenOrientation="portrait">
         </activity>
         <activity
-            android:name="com.voterreach.ogruiz.voterreach.SurveyActivity">
+            android:name="com.voterreach.ogruiz.voterreach.SurveyActivity"
+            android:screenOrientation="portrait">
         </activity>
         <activity
-            android:name="com.voterreach.ogruiz.voterreach.RegistrationActivity">
+            android:name="com.voterreach.ogruiz.voterreach.RegistrationActivity"
+            android:screenOrientation="portrait">
 
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -3,12 +3,15 @@ package com.voterreach.ogruiz.voterreach;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.SeekBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.BufferedReader;
@@ -24,23 +27,26 @@ import java.net.URL;
 import java.util.Calendar;
 import java.util.Date;
 import android.widget.Button;
+import android.widget.ToggleButton;
+
+import static java.lang.String.valueOf;
 
 
 public class SurveyActivity extends AppCompatActivity{
     public static final int CONNECTION_TIMEOUT=10000;
     public static final int READ_TIMEOUT=15000;
 
-    private String a1 = "N";
-    private String a2= "N";
-    private String a3 = "N";
-    private String a4 = "N";
-    private String a5 = "N";
-    private String a6 = "N";
-    private String a7 = "N";
+    private String[] a = {"N","N","N","N"};
     private String noAnswer = "N";
     private String badNumber = "N";
-    private String dateTime = "";
     private String voter_id;
+    private String[] type;
+    private String[] question;
+    private SeekBar[] seekers;
+    private ToggleButton[] buttons;
+    private String campaigncode;
+
+    private String pbuuid;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,125 +57,178 @@ public class SurveyActivity extends AppCompatActivity{
 
         String questions = prefs.getString("Questions", "DEFAULT");
 
-        String delims = "[,]";
-        String[] question = questions.split(delims);
+        String response_types = prefs.getString("Response_Type", "DEFAULT");
 
-        Button[] buttons = new Button[question.length];
+        campaigncode = prefs.getString(getString(R.string.pref_code), "DEFAULT");
+
+        pbuuid = prefs.getString(getString(R.string.pref_pbuuid), "DEFAULT");
+
+        String delims = "[,]";
+
+        type = response_types.split(delims);
+        question = questions.split(delims);
+
+        buttons = new ToggleButton[question.length];
+        seekers = new SeekBar[question.length];
 
         final int ID= R.id.b1;
+        final int PID= R.id.s1;
 
         for (int i = 0; i < question.length; i = i + 1){
 
-            buttons[i] = (Button)findViewById(ID + i);
-            buttons[i].setText(question[i]);
-            buttons[i].setPadding(0,0,0,0);
+            seekers[i] = (SeekBar) findViewById(PID + i);
 
+            buttons[i] = (ToggleButton)findViewById(ID + i);
+            buttons[i].setText(question[i]);
+            buttons[i].setPadding(15,0,15,0);
+            buttons[i].setTextOn(null);
+            buttons[i].setTextOff(null);
+            buttons[i].setVisibility(View.VISIBLE);
         }
 
         voter_id = prefs.getString(getString(R.string.pref_voterid), "DEFAULT");
-
-        System.out.println(voter_id);
 
     }
 
     public void b1(View arg0) {
 
-        if (a1.equals("Y")) {
-            a1 = "N";
+        if (type[0].equals("s")) {
+            buttons[0].setVisibility(View.GONE);
+
+            seekers[0].setVisibility(View.VISIBLE);
+
+            TextView t = (TextView) findViewById(R.id.st1);
+            t.setVisibility(View.VISIBLE);
+        }
+
+        if (a[0].equals("Y")) {
+
+            a[0] = "N";
         }
         else
         {
-            a1 = "Y";
+            a[0] = "Y";
         }
     }
 
     public void b2(View arg0) {
-        if (a2.equals("Y")) {
-            a2 = "N";
+
+        if (type[1].equals("s")) {
+
+            buttons[1].setVisibility(View.GONE);
+            seekers[1].setVisibility(View.VISIBLE);
+
+            TextView t = (TextView) findViewById(R.id.st2);
+            t.setVisibility(View.VISIBLE);
+        }
+
+        if (a[1].equals("Y")) {
+
+
+            a[1] = "N";
         }
         else
         {
-            a2 = "Y";
+
+            a[1] = "Y";
         }
     }
 
     public void b3(View arg0) {
-        if (a3.equals("Y")) {
-            a3= "N";
+
+        if (type[2].equals("s")) {
+
+            buttons[2].setVisibility(View.GONE);
+            seekers[2].setVisibility(View.VISIBLE);
+
+            TextView t = (TextView) findViewById(R.id.st3);
+            t.setVisibility(View.VISIBLE);
+        }
+
+        if (a[2].equals("Y")) {
+
+            a[2]= "N";
         }
         else
         {
-            a3 = "Y";
+
+            a[2] = "Y";
         }
     }
 
     public void b4(View arg0) {
-        if (a4.equals("Y")) {
-            a4 = "N";
-        }
-        else
-        {
-            a4 = "Y";
-        }
-    }
 
-    public void b5(View arg0) {
-        if (a5.equals("Y")) {
-            a5 = "N";
-        }
-        else
-        {
-            a5 = "Y";
-        }
-    }
+        if (type[3].equals("s")) {
 
-    public void b6(View arg0) {
-        if (a6.equals("Y")) {
-            a6 = "N";
-        }
-        else
-        {
-            a6 = "Y";
-        }
-    }
+            buttons[3].setVisibility(View.GONE);
+            seekers[3].setVisibility(View.VISIBLE);
 
-    public void b7(View arg0) {
-        if (a7.equals("Y")) {
-            a7 = "N";
+            TextView t = (TextView) findViewById(R.id.st4);
+            t.setVisibility(View.VISIBLE);
+
+        }
+
+        if (a[3].equals("Y")) {
+            a[3] = "N";
         }
         else
         {
-            a7 = "Y";
+            a[3] = "Y";
         }
     }
 
     public void noAnswer(View arg0) {
+
+        Button button = (Button)findViewById(R.id.noAnswer);
+
         if (noAnswer.equals("Y")) {
+
+            button.setBackgroundResource(R.drawable.noanswer);
             noAnswer = "N";
         }
         else
         {
+            button.setBackgroundResource(R.drawable.noanswerblue);
             noAnswer = "Y";
         }
     }
 
     public void badNumber(View arg0) {
+
+        Button button = (ToggleButton)findViewById(R.id.badNumber);
+
         if (badNumber.equals("Y")) {
+            button.setBackgroundResource(R.drawable.bad);
             badNumber = "N";
         }
         else
         {
+            button.setTextColor(Color.parseColor("#fdfdfd"));
+            button.setBackgroundResource(R.drawable.badblue);
             badNumber = "Y";
         }
     }
 
+    @Override
+    public void onBackPressed() {
+        //your code when back button pressed
+        Intent intent = new Intent(SurveyActivity.this, CallActivity.class);
+        startActivity(intent);
+        SurveyActivity.this.finish();
+    }
 
     public void checkSave(View arg0) {
         Date currentTime = Calendar.getInstance().getTime();
 
-        dateTime = currentTime.toString();
+        String dateTime = currentTime.toString();
 
-        new SaveData().execute(a1, a2, a3, a4, a5, a6, a7, noAnswer, badNumber, voter_id, dateTime);
+        for (int i = 0; i < question.length; i = i + 1) {
+            if (type[i].equals("s")) {
+                a[i] = valueOf(seekers[i].getProgress() + 1);
+            }
+        }
+
+        new SaveData().execute(a[0], a[1], a[2], a[3], noAnswer, badNumber, voter_id, dateTime, campaigncode, pbuuid);
     }
 
     private class SaveData extends AsyncTask<String, String, String> {
@@ -192,7 +251,7 @@ public class SurveyActivity extends AppCompatActivity{
             try {
 
                 // Enter URL address where your php file resides
-                url = new URL("http://voterreach.org/cgi-bin/survey.php");
+                url = new URL("https://voterreach.org/cgi-bin/survey.php");
 
             } catch (MalformedURLException e) {
                 // TODO Auto-generated catch block
@@ -217,13 +276,12 @@ public class SurveyActivity extends AppCompatActivity{
                         .appendQueryParameter("a2", params[1])
                         .appendQueryParameter("a3", params[2])
                         .appendQueryParameter("a4", params[3])
-                        .appendQueryParameter("a5", params[4])
-                        .appendQueryParameter("a6", params[5])
-                        .appendQueryParameter("a7", params[6])
-                        .appendQueryParameter("noanswer", params[7])
-                        .appendQueryParameter("badnumber", params[8])
-                        .appendQueryParameter("voteruuid", params[9])
-                        .appendQueryParameter("calldate", params[10]);
+                        .appendQueryParameter("noanswer", params[4])
+                        .appendQueryParameter("badnumber", params[5])
+                        .appendQueryParameter("voteruuid", params[6])
+                        .appendQueryParameter("calldate", params[7])
+                        .appendQueryParameter("campaigncode", params[8])
+                        .appendQueryParameter("pbuuid", params[9]);
 
                 String query = builder.build().getEncodedQuery();
 
@@ -281,8 +339,6 @@ public class SurveyActivity extends AppCompatActivity{
         protected void onPostExecute(String result){
             pdLoading.dismiss();
 
-            //Toast.makeText(SurveyActivity.this, currentTime.toString(), Toast.LENGTH_LONG).show();
-
             if(result.equalsIgnoreCase("\uFEFFtrue")) {
 
 
@@ -293,7 +349,7 @@ public class SurveyActivity extends AppCompatActivity{
 
             else{
 
-                Toast.makeText(SurveyActivity.this, "Nope.", Toast.LENGTH_LONG).show();
+                Toast.makeText(SurveyActivity.this, "A problem with remote server has occured.", Toast.LENGTH_LONG).show();
             }
         }
 

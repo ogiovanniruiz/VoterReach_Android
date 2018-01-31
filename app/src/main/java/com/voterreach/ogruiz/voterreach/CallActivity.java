@@ -6,12 +6,16 @@ import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
+
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
+
 
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -24,6 +28,9 @@ import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.Calendar;
+import java.util.Date;
+
 
 
 public class CallActivity extends AppCompatActivity{
@@ -31,10 +38,10 @@ public class CallActivity extends AppCompatActivity{
     public static final int READ_TIMEOUT=15000;
 
     private String voterid;
-    private String pbuuid;
-    private String campaign_code;
     private SharedPreferences prefs;
-
+    private String voterphonenumber;
+    private String script_link;
+    private Switch blockid_switch;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,14 +50,53 @@ public class CallActivity extends AppCompatActivity{
 
         prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
 
-        pbuuid = prefs.getString(getString(R.string.pref_pbuuid), "DEFAULT");
-        campaign_code = prefs.getString(getString(R.string.pref_code), "DEFAULT");
+        String pbuuid = prefs.getString(getString(R.string.pref_pbuuid), "DEFAULT");
+        String campaign_code = prefs.getString(getString(R.string.pref_code), "DEFAULT");
+        script_link = prefs.getString("Script_link", "DEFAULT");
 
-        final String code = campaign_code;
-        final String id = pbuuid;
+        Boolean checked = prefs.getBoolean("checked", false);
 
-        new RequestCall().execute(code, id);
+        blockid_switch = (Switch)findViewById(R.id.switch1);
+
+        blockid_switch.setChecked(checked);
+
+        new RequestCall().execute(campaign_code, pbuuid);
     }
+
+    public void ExitButton(View arg0) {
+
+        final ProgressDialog exiting = new ProgressDialog(CallActivity.this);
+
+        SharedPreferences.Editor edit = prefs.edit();
+
+        boolean checked = blockid_switch.isChecked();
+
+        edit.putBoolean("checked", checked);
+        edit.apply();
+
+        //this method will be running on UI thread
+        exiting.setMessage("Voter Reach is Shutting Down. Thank you for your help!");
+        exiting.setCancelable(false);
+        exiting.show();
+
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            public void run() {
+                exiting.dismiss();
+                finish();
+                System.exit(0);
+            }
+        }, 2000);
+    }
+
+    @Override
+    public void onBackPressed() {
+        //your code when back button pressed
+        Intent intent = new Intent(CallActivity.this, LoginActivity.class);
+        startActivity(intent);
+        CallActivity.this.finish();
+    }
+
 
     private class RequestCall extends AsyncTask<String, String, String>{
 
@@ -74,8 +120,7 @@ public class CallActivity extends AppCompatActivity{
             try {
 
                 // Enter URL address where your php file resides
-                url = new URL("http://voterreach.org/cgi-bin/call.php");
-
+                url = new URL("https://voterreach.org/cgi-bin/call.php");
 
             } catch (MalformedURLException e) {
                 // TODO Auto-generated catch block
@@ -164,16 +209,28 @@ public class CallActivity extends AppCompatActivity{
 
             else {
 
-                System.out.println(result);
                 String delims = "[,]";
                 String[] voter_data = result.split(delims);
 
-                final TextView voterNameTextView = (TextView) findViewById(R.id.textView);
+                final TextView voterNameTextView = (TextView) findViewById(R.id.voterName);
+                final TextView callernumberTextView = (TextView) findViewById(R.id.numbercalls);
+                final TextView totalcallsTextView = (TextView) findViewById(R.id.totalcalls);
+
                 String fullname = voter_data[0] + " " + voter_data[1];
 
                 voterNameTextView.setText(fullname);
 
+                voterphonenumber = voter_data[2];
+
                 voterid = voter_data[3];
+
+                String feedback = "You have made " + voter_data[5] + " calls.";
+
+                String total_feedback = "The campaign has made " + voter_data[6] + " total calls.";
+
+                callernumberTextView.setText(feedback);
+
+                totalcallsTextView.setText(total_feedback);
             }
 
         }
@@ -182,22 +239,53 @@ public class CallActivity extends AppCompatActivity{
     // Triggers when LOGIN Button clicked
     public void CallButton(View arg0) {
 
-        // Initialize  AsyncLogin() class with email and password
-        Toast.makeText(CallActivity.this, "Calling Voter...", Toast.LENGTH_LONG).show();
+        Date currentTime = Calendar.getInstance().getTime();
+
+        int hour = currentTime.getHours();
+
+        if ((hour >= 23) || (hour <= 9)){
+
+            Toast.makeText(CallActivity.this, "It is after 11pm or before 9am. The Call function has been disabled.", Toast.LENGTH_LONG).show();
+        }
+
+        else{
+
+            boolean checked = blockid_switch.isChecked();
+
+            String number;
+
+            if (checked) {
+
+                number = "*67" + voterphonenumber;
+            }
+            else{
+                number = voterphonenumber;
+            }
+
+
+            SharedPreferences.Editor edit = prefs.edit();
+            edit.putString(getString(R.string.pref_voterid), voterid);
+            edit.putBoolean("checked", checked);
+            edit.apply();
+
+            Intent intent = new Intent(CallActivity.this,SurveyActivity.class);
+            startActivity(intent);
+
+
+            startActivity(new Intent(Intent.ACTION_DIAL, Uri.fromParts("tel", number, null)));
+            CallActivity.this.finish();
+        }
 
     }
 
+
     // Triggers when LOGIN Button clicked
-    public void SurveyButton(View arg0) {
+    public void ScriptButton(View arg0) {
 
-        SharedPreferences.Editor edit = prefs.edit();
-        edit.putString(getString(R.string.pref_voterid), voterid);
-        edit.apply();
+        Intent openURL = new Intent(android.content.Intent.ACTION_VIEW);
+        openURL.setData(Uri.parse(script_link));
+        startActivity(openURL);
 
-        // Initialize  AsyncLogin() class with email and password
-        Intent intent = new Intent(CallActivity.this,SurveyActivity.class);
-        startActivity(intent);
-        CallActivity.this.finish();
 
     }
 

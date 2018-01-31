@@ -9,7 +9,7 @@
     tools:showIn="@layout/activity_call">
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/voterName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/Name"
@@ -18,31 +18,86 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.2" />
-
+        app:layout_constraintVertical_bias="0.18"
+        android:textColor="#000000"/>
 
     <Button
-        android:id="@+id/callbutton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/CallButton"
+        android:id="@+id/callButton"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.5"
-        android:onClick="CallButton"/>
+        app:layout_constraintVertical_bias="0.40"
+        android:background="@drawable/callbt"
+        android:onClick="CallButton"
+        android:layout_width="180dip"
+        android:layout_height="60dip"/>
 
     <Button
-        android:id="@+id/SurveyButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/EnterButton"
+        android:id="@+id/scriptButton"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.8"
-        android:onClick="SurveyButton"/>
+        app:layout_constraintVertical_bias="0.60"
+        android:background="@drawable/script"
+        android:onClick="ScriptButton"
+        android:layout_width="180dip"
+        android:layout_height="60dip"/>
+
+
+    <Button
+        android:id="@+id/ExitButton"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.80"
+        android:background="@drawable/exit"
+        android:onClick="ExitButton"
+        android:layout_width="180dip"
+        android:layout_height="60dip"/>
+
+    <TextView
+        android:id="@+id/numbercalls"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Number of Calls"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.92"
+        android:textColor="#000000" />
+
+    <TextView
+        android:id="@+id/totalcalls"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Total Calls"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.96"
+        android:textColor="#000000"/>
+
+    <Switch
+        android:id="@+id/switch1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:theme="@style/SCBSwitch"
+        android:text="Block Caller ID"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="39dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.025"
+        app:layout_constraintHorizontal_bias="0.05"
+        android:textColor="#000000"/>
 
 </android.support.constraint.ConstraintLayout>

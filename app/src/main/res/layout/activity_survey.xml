@@ -8,7 +8,20 @@
     tools:context="com.voterreach.ogruiz.voterreach.SurveyActivity"
     tools:showIn="@layout/activity_survey">
 
-    <Button
+    <TextView
+        android:id="@+id/voterName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/SurveyPrompt"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.05"
+        android:textColor="#000000"/>
+
+    <ToggleButton
         android:id="@+id/b1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -18,11 +31,41 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.02"
+        app:layout_constraintVertical_bias="0.15"
+        android:textColor="#fdfdfd"
+        android:textAllCaps="false"
         android:background="@drawable/mybutton"
-        android:onClick="b1"/>
+        android:onClick="b1"
+        android:visibility="gone" />
 
-    <Button
+    <SeekBar
+        android:id="@+id/s1"
+        style="@style/Widget.AppCompat.SeekBar.Discrete"
+        android:layout_width="300dip"
+        android:layout_height="wrap_content"
+        android:max="5"
+        android:progress="0"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.15"
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/st1"
+        android:layout_height="wrap_content"
+        android:text="  1          2          3         4          5          6"
+        android:textSize="18sp"
+        android:layout_width="300dip"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.18"
+        android:visibility="gone"/>
+
+    <ToggleButton
         android:id="@+id/b2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -32,11 +75,42 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.14"
+        app:layout_constraintVertical_bias="0.3"
+        android:textColor="#fdfdfd"
+        android:textAllCaps="false"
         android:background="@drawable/mybutton"
-        android:onClick="b2"/>
+        android:onClick="b2"
+        android:visibility="gone"/>
 
-    <Button
+    <SeekBar
+        android:id="@+id/s2"
+        style="@style/Widget.AppCompat.SeekBar.Discrete"
+        android:layout_width="300dip"
+        android:layout_height="wrap_content"
+        android:max="5"
+        android:progress="0"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.3"
+        android:visibility="gone"/>
+
+    <TextView
+        android:id="@+id/st2"
+        android:layout_height="wrap_content"
+        android:text="  1          2          3         4          5          6"
+        android:textSize="18sp"
+        android:layout_width="300dip"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.33"
+        android:visibility="gone"/>
+
+    <ToggleButton
         android:id="@+id/b3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -44,11 +118,41 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.26"
+        app:layout_constraintVertical_bias="0.45"
+        android:textColor="#fdfdfd"
+        android:textAllCaps="false"
         android:background="@drawable/mybutton"
-        android:onClick="b3"/>
+        android:onClick="b3"
+        android:visibility="gone"/>
 
-    <Button
+    <SeekBar
+        android:id="@+id/s3"
+        style="@style/Widget.AppCompat.SeekBar.Discrete"
+        android:layout_width="300dip"
+        android:layout_height="wrap_content"
+        android:max="5"
+        android:progress="0"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.45"
+        android:visibility="gone"/>
+
+    <TextView
+        android:id="@+id/st3"
+        android:layout_height="wrap_content"
+        android:text="  1          2          3         4          5          6"
+        android:textSize="18sp"
+        android:layout_width="300dip"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.48"
+        android:visibility="gone"/>
+
+    <ToggleButton
         android:id="@+id/b4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -56,84 +160,102 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.38"
+        app:layout_constraintVertical_bias="0.60"
+        android:textColor="#fdfdfd"
+        android:textAllCaps="false"
         android:background="@drawable/mybutton"
-        android:onClick="b4"/>
+        android:onClick="b4"
+        android:visibility="gone"/>
 
-    <Button
-        android:id="@+id/b5"
-        android:layout_width="wrap_content"
+    <SeekBar
+        android:id="@+id/s4"
+        style="@style/Widget.AppCompat.SeekBar.Discrete"
+        android:layout_width="300dip"
         android:layout_height="wrap_content"
+        android:max="5"
+        android:progress="0"
+
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.5"
-        android:background="@drawable/mybutton"
-        android:onClick="b5"/>
+        app:layout_constraintVertical_bias="0.60"
+        android:visibility="gone"/>
 
-    <Button
-        android:id="@+id/b6"
-        android:layout_width="wrap_content"
+    <TextView
+        android:id="@+id/st4"
         android:layout_height="wrap_content"
+        android:text="  1          2          3         4          5          6"
+        android:textSize="18sp"
+        android:layout_width="300dip"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.62"
-        android:background="@drawable/mybutton"
-        android:onClick="b6"/>
-    <Button
-        android:id="@+id/b7"
+        app:layout_constraintVertical_bias="0.63"
+        android:visibility="gone"/>
+
+
+
+    <NumberPicker
+        android:id="@+id/p4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        tools:layout_editor_absoluteX="171dp"
+        tools:layout_editor_absoluteY="345dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.74"
-        android:background="@drawable/mybutton"
-        android:onClick="b7"/>
+        app:layout_constraintVertical_bias="0.60"
+        android:scaleX="0.75"
+        android:scaleY="0.75"
+        android:visibility="gone"/>
 
-    <Button
+
+    <ToggleButton
         android:id="@+id/noAnswer"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/No_Answer"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.86"
-        app:layout_constraintHorizontal_bias="0.3"
-        android:background="@drawable/mybutton"
-        android:onClick="noAnswer"/>
+        app:layout_constraintVertical_bias="0.75"
+        app:layout_constraintHorizontal_bias="0.1"
+        android:onClick="noAnswer"
+        android:background="@drawable/noanswer"
+        android:layout_width="120dip"
+        android:layout_height="40dip"
+        android:textOn=""
+        android:textOff=""
+        />
 
-    <Button
+    <ToggleButton
         android:id="@+id/badNumber"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/Bad_Number"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.86"
-        app:layout_constraintHorizontal_bias="0.7"
-        android:background="@drawable/mybutton"
-        android:onClick="badNumber"/>
+        app:layout_constraintVertical_bias="0.75"
+        app:layout_constraintHorizontal_bias="0.90"
+        android:onClick="badNumber"
+        android:background="@drawable/bad"
+        android:layout_width="120dip"
+        android:layout_height="40dip"
+        android:textOn=""
+        android:textOff=""
+        />
 
     <Button
-        android:id="@+id/button2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/Save"
+        android:id="@+id/uploadButton"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.97"
-        android:onClick="checkSave"/>
+        app:layout_constraintVertical_bias="0.95"
+        android:background="@drawable/save"
+        android:onClick="checkSave"
+        android:layout_width="80dip"
+        android:layout_height="80dip"/>
 
 
 </android.support.constraint.ConstraintLayout>

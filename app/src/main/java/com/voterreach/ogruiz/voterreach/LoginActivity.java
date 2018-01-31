@@ -83,7 +83,7 @@ public class LoginActivity extends AppCompatActivity{
             try {
 
                 // Enter URL address where your php file resides
-                url = new URL("http://voterreach.org/cgi-bin/login.php");
+                url = new URL("https://voterreach.org/cgi-bin/login.php");
 
             } catch (MalformedURLException e) {
                 // TODO Auto-generated catch block
@@ -166,24 +166,32 @@ public class LoginActivity extends AppCompatActivity{
             pdLoading.dismiss();
 
             String delims = "[,]";
-            String[] response = result.split(delims, 2);
+            String[] response = result.split(delims);
 
             if (result.equalsIgnoreCase("\uFEFFfalse")){
 
                 // If username and password does not match display a error message
-                Toast.makeText(LoginActivity.this, "You connected but have Invalid Campaign Code.", Toast.LENGTH_LONG).show();
+                Toast.makeText(LoginActivity.this, "You have connected but have an invalid Campaign Code.", Toast.LENGTH_LONG).show();
 
             }
             else if (result.equalsIgnoreCase("exception") || result.equalsIgnoreCase("unsuccessful"))
             {
-                Toast.makeText(LoginActivity.this, "You have MASSIVE Connection Problems.", Toast.LENGTH_LONG).show();
+                Toast.makeText(LoginActivity.this, "Could not connect to the server. Please contact customer service.", Toast.LENGTH_LONG).show();
             }
 
             else if (response[0].equalsIgnoreCase("\uFEFFtrue")){
 
+                String questions = response[1] + "," + response[2] + "," + response[3] +"," + response[4];
+
+                String script_link = response[5];
+
+                String response_types = response[6] + "," + response[7] + "," + response[8] +"," + response[9];
+
                 Intent intent = new Intent(LoginActivity.this,CallActivity.class);
                 SharedPreferences.Editor edit = prefs.edit();
-                edit.putString("Questions", response[1]);
+                edit.putString("Questions", questions);
+                edit.putString("Script_link", script_link);
+                edit.putString("Response_Type", response_types);
                 edit.apply();
 
                 startActivity(intent);

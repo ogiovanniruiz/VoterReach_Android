@@ -88,7 +88,7 @@ public class RegistrationActivity extends AppCompatActivity{
             try {
 
                 // Enter URL address where your php file resides
-                url = new URL( "http://voterreach.org/cgi-bin/register.php");
+                url = new URL( "https://voterreach.org/cgi-bin/register.php");
 
             } catch (MalformedURLException e) {
                 // TODO Auto-generated catch block
@@ -170,9 +170,6 @@ public class RegistrationActivity extends AppCompatActivity{
 
             pdLoading.dismiss();
 
-            Toast.makeText(RegistrationActivity.this, result, Toast.LENGTH_LONG).show();
-
-
             if(result.equalsIgnoreCase("\uFEFFtrue"))
             {
                 /* Here launching another activity when login successful. If you persist login state
@@ -187,15 +184,14 @@ public class RegistrationActivity extends AppCompatActivity{
                 startActivity(intent);
                 RegistrationActivity.this.finish();
             }
-            else if (result.equalsIgnoreCase("\uFEFF\uFEFFfalse")){
+            else if (result.equalsIgnoreCase("\uFEFFfalse")){
 
-                // If username and password does not match display a error message
-                Toast.makeText(RegistrationActivity.this, "You connected but but there was an issue with database.", Toast.LENGTH_LONG).show();
+                Toast.makeText(RegistrationActivity.this, "You connected but there was an issue with the database.", Toast.LENGTH_LONG).show();
 
             }
             else if (result.equalsIgnoreCase("exception") || result.equalsIgnoreCase("unsuccessful"))
             {
-                Toast.makeText(RegistrationActivity.this, "You have MASSIVE Connection Problems.", Toast.LENGTH_LONG).show();
+                Toast.makeText(RegistrationActivity.this, "There was problem with the connection.", Toast.LENGTH_LONG).show();
             }
         }
     }
