@@ -1,18 +1,25 @@
 package com.voterreach.ogruiz.voterreach;
 
+import android.Manifest;
+import android.annotation.TargetApi;
 import android.app.ProgressDialog;
+import android.content.ContentValues;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.AsyncTask;
+
 import android.os.Bundle;
 import android.os.Handler;
 import android.preference.PreferenceManager;
+import android.provider.BlockedNumberContract;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
 
-import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -41,7 +48,6 @@ public class CallActivity extends AppCompatActivity{
     private SharedPreferences prefs;
     private String voterphonenumber;
     private String script_link;
-    private Switch blockid_switch;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,26 +59,14 @@ public class CallActivity extends AppCompatActivity{
         String pbuuid = prefs.getString(getString(R.string.pref_pbuuid), "DEFAULT");
         String campaign_code = prefs.getString(getString(R.string.pref_code), "DEFAULT");
         script_link = prefs.getString("Script_link", "DEFAULT");
+        String activity = prefs.getString("Activities", "DEFAULT");
 
-        Boolean checked = prefs.getBoolean("checked", false);
-
-        blockid_switch = (Switch)findViewById(R.id.switch1);
-
-        blockid_switch.setChecked(checked);
-
-        new RequestCall().execute(campaign_code, pbuuid);
+        new RequestCall().execute(campaign_code, pbuuid, activity);
     }
 
     public void ExitButton(View arg0) {
 
         final ProgressDialog exiting = new ProgressDialog(CallActivity.this);
-
-        SharedPreferences.Editor edit = prefs.edit();
-
-        boolean checked = blockid_switch.isChecked();
-
-        edit.putBoolean("checked", checked);
-        edit.apply();
 
         //this method will be running on UI thread
         exiting.setMessage("Voter Reach is Shutting Down. Thank you for your help!");
@@ -100,7 +94,7 @@ public class CallActivity extends AppCompatActivity{
 
     private class RequestCall extends AsyncTask<String, String, String>{
 
-        ProgressDialog pdLoading = new ProgressDialog(CallActivity.this);
+        ProgressDialog pdLoading = new ProgressDialog(CallActivity.this,R.style.AppCompatAlertDialogStyle);
         HttpURLConnection conn;
         URL url = null;
 
@@ -142,7 +136,8 @@ public class CallActivity extends AppCompatActivity{
                 // Append parameters to URL
                 Uri.Builder builder = new Uri.Builder()
                         .appendQueryParameter("campaigncode", params[0])
-                        .appendQueryParameter("pbuuid", params[1]);
+                        .appendQueryParameter("pbuuid", params[1])
+                        .appendQueryParameter("activity", params[2]);
 
                 String query = builder.build().getEncodedQuery();
 
@@ -224,60 +219,49 @@ public class CallActivity extends AppCompatActivity{
 
                 voterid = voter_data[3];
 
-                String feedback = "You have made " + voter_data[5] + " calls.";
+                String feedback = "You have made " + voter_data[4] + " calls.";
 
-                String total_feedback = "The campaign has made " + voter_data[6] + " total calls.";
+                String total_feedback = "The campaign has made " + voter_data[5] + " total calls.";
 
                 callernumberTextView.setText(feedback);
 
                 totalcallsTextView.setText(total_feedback);
+
+                SharedPreferences.Editor edit = prefs.edit();
+                edit.putString("FullName", fullname);
+                edit.apply();
             }
 
         }
     }
 
-    // Triggers when LOGIN Button clicked
     public void CallButton(View arg0) {
 
         Date currentTime = Calendar.getInstance().getTime();
 
         int hour = currentTime.getHours();
 
-        if ((hour >= 23) || (hour <= 9)){
+        if ((1==2) &&((hour >= 23) || (hour <= 9))){
 
             Toast.makeText(CallActivity.this, "It is after 11pm or before 9am. The Call function has been disabled.", Toast.LENGTH_LONG).show();
         }
 
         else{
 
-            boolean checked = blockid_switch.isChecked();
-
-            String number;
-
-            if (checked) {
-
-                number = "*67" + voterphonenumber;
-            }
-            else{
-                number = voterphonenumber;
-            }
-
-
             SharedPreferences.Editor edit = prefs.edit();
             edit.putString(getString(R.string.pref_voterid), voterid);
-            edit.putBoolean("checked", checked);
             edit.apply();
 
             Intent intent = new Intent(CallActivity.this,SurveyActivity.class);
             startActivity(intent);
 
-
-            startActivity(new Intent(Intent.ACTION_DIAL, Uri.fromParts("tel", number, null)));
+            startActivity(new Intent(Intent.ACTION_DIAL, Uri.fromParts("tel", voterphonenumber, null)));
             CallActivity.this.finish();
+
+
         }
 
     }
-
 
     // Triggers when LOGIN Button clicked
     public void ScriptButton(View arg0) {

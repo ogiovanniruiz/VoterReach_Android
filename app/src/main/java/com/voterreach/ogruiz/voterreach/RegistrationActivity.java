@@ -35,6 +35,7 @@ public class RegistrationActivity extends AppCompatActivity{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
 
         prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
         boolean previouslyStarted = prefs.getBoolean(getString(R.string.pref_previously_started), false);
@@ -46,12 +47,16 @@ public class RegistrationActivity extends AppCompatActivity{
             RegistrationActivity.this.finish();
 
         }
+        else{
 
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_registration);
+            setContentView(R.layout.activity_registration);
 
-        uniqueid = UUID.randomUUID().toString();
-        etUserName = (EditText) findViewById(R.id.username);
+            uniqueid = UUID.randomUUID().toString();
+            etUserName = (EditText) findViewById(R.id.username);
+        }
+
+
+
 
     }
     // Triggers when LOGIN Button clicked
@@ -69,7 +74,7 @@ public class RegistrationActivity extends AppCompatActivity{
     private class AsyncLogin extends AsyncTask<String, String, String>
     {
 
-        ProgressDialog pdLoading = new ProgressDialog(RegistrationActivity.this);
+        ProgressDialog pdLoading = new ProgressDialog(RegistrationActivity.this,R.style.AppCompatAlertDialogStyle);
         HttpURLConnection conn;
         URL url = null;
 

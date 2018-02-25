@@ -31,6 +31,7 @@ public class LoginActivity extends AppCompatActivity{
     private EditText etCode;
     private String uniqueid;
     private SharedPreferences prefs;
+    private String mode;
 
 
     @Override
@@ -42,29 +43,46 @@ public class LoginActivity extends AppCompatActivity{
 
         // Get Reference to variables
         uniqueid = prefs.getString(getString(R.string.pref_pbuuid), "DEFAULT");
-        etCode = (EditText) findViewById(R.id.code);
+        etCode = (EditText) findViewById(R.id.campaigncode);
     }
 
-    // Triggers when LOGIN Button clicked
-    public void checkLogin(View arg0) {
+    // Triggers when LOGIN Button clicked            Toast.makeText(SurveyActivity.this, result, Toast.LENGTH_LONG).show();
+    public void checkLoginPhoneBank(View arg0) {
 
         // Get text from user, password and Campaign Code fields.
         final String code = etCode.getText().toString();
         final String id = uniqueid;
 
         SharedPreferences.Editor edit = prefs.edit();
-        edit.putString(getString(R.string.pref_code), code);
+        edit.putString("Code", code);
         edit.apply();
 
+        mode = "phonebank";
+
         // Initialize  AsyncLogin() class with email and password
-        new AsyncLogin().execute(code, id);
+        new AsyncLogin().execute(code, id, mode);
+
+    }
+
+    // Triggers when LOGIN Button clicked
+    public void checkLoginCanvas(View arg0) {
+        // Get text from user, password and Campaign Code fields.
+        final String code = etCode.getText().toString();
+        final String id = uniqueid;
+
+        SharedPreferences.Editor edit = prefs.edit();
+        edit.putString("Code", code);
+        edit.apply();
+
+        mode = "canvas";
+        new AsyncLogin().execute(code, id, mode);
 
     }
 
     private class AsyncLogin extends AsyncTask<String, String, String>
     {
 
-        ProgressDialog pdLoading = new ProgressDialog(LoginActivity.this);
+        ProgressDialog pdLoading = new ProgressDialog(LoginActivity.this,R.style.AppCompatAlertDialogStyle);
         HttpURLConnection conn;
         URL url = null;
 
@@ -104,7 +122,8 @@ public class LoginActivity extends AppCompatActivity{
                 // Append parameters to URL
                 Uri.Builder builder = new Uri.Builder()
                         .appendQueryParameter("campaigncode", params[0])
-                        .appendQueryParameter("pbuuid", params[1]);
+                        .appendQueryParameter("pbuuid", params[1])
+                        .appendQueryParameter("mode", params[2]);
 
                 String query = builder.build().getEncodedQuery();
 
@@ -176,25 +195,37 @@ public class LoginActivity extends AppCompatActivity{
             }
             else if (result.equalsIgnoreCase("exception") || result.equalsIgnoreCase("unsuccessful"))
             {
-                Toast.makeText(LoginActivity.this, "Could not connect to the server. Please contact customer service.", Toast.LENGTH_LONG).show();
+                Toast.makeText(LoginActivity.this, "Connection is slow. Please try again in a few seconds.", Toast.LENGTH_LONG).show();
+            }
+
+            else if (result.equalsIgnoreCase("\uFEFFBlocked"))
+            {
+                Toast.makeText(LoginActivity.this, "Could not login. Please contact your campaign manager.", Toast.LENGTH_LONG).show();
             }
 
             else if (response[0].equalsIgnoreCase("\uFEFFtrue")){
 
-                String questions = response[1] + "," + response[2] + "," + response[3] +"," + response[4];
+                StringBuilder output = new StringBuilder("");
 
-                String script_link = response[5];
+                for (int i = 1; i < response.length; i = i + 1) {
 
-                String response_types = response[6] + "," + response[7] + "," + response[8] +"," + response[9];
 
-                Intent intent = new Intent(LoginActivity.this,CallActivity.class);
+                    output.append(response[i]);
+                    output.append(",");
+                }
+
+                String new_output = output.substring(0, output.length() - 1);
+
+                Intent intent;
+
+                intent = new Intent(LoginActivity.this,ChooseActivity.class);
+                startActivity(intent);
+
                 SharedPreferences.Editor edit = prefs.edit();
-                edit.putString("Questions", questions);
-                edit.putString("Script_link", script_link);
-                edit.putString("Response_Type", response_types);
+                edit.putString("Activities", new_output);
+                edit.putString("Mode", mode);
                 edit.apply();
 
-                startActivity(intent);
                 LoginActivity.this.finish();
 
             }
