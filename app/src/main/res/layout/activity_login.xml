@@ -14,7 +14,11 @@
         android:orientation="vertical"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
+<<<<<<< HEAD
         android:background="@color/background">
+=======
+        android:background="@drawable/background_chalk">
+>>>>>>> d1b255f2ee8a88f2a386e407553958a525ed0b6e
     </RelativeLayout>
 
     <ImageView
@@ -22,19 +26,31 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintHorizontal_bias="0.5"
+<<<<<<< HEAD
         app:layout_constraintVertical_bias="0.2"
+=======
+        app:layout_constraintVertical_bias="0.1"
+>>>>>>> d1b255f2ee8a88f2a386e407553958a525ed0b6e
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+<<<<<<< HEAD
         app:srcCompat="@drawable/logo" />
+=======
+        app:srcCompat="@drawable/phlogo" />
+>>>>>>> d1b255f2ee8a88f2a386e407553958a525ed0b6e
 
     <EditText
         android:id="@+id/campaigncode"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         app:layout_constraintHorizontal_bias="0.5"
+<<<<<<< HEAD
         app:layout_constraintVertical_bias="0.7"
+=======
+        app:layout_constraintVertical_bias="0.5"
+>>>>>>> d1b255f2ee8a88f2a386e407553958a525ed0b6e
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
@@ -48,8 +64,13 @@
         android:id="@+id/button"
         android:layout_width="60dip"
         android:layout_height="60dip"
+<<<<<<< HEAD
         app:layout_constraintHorizontal_bias="0.20"
         app:layout_constraintVertical_bias="0.5"
+=======
+        app:layout_constraintHorizontal_bias="0.35"
+        app:layout_constraintVertical_bias="0.28"
+>>>>>>> d1b255f2ee8a88f2a386e407553958a525ed0b6e
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
@@ -62,22 +83,38 @@
         android:id="@+id/phonebank"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+<<<<<<< HEAD
         android:text="Phonebank"
         android:textSize="14dp"
+=======
+        android:text="Phone Bank"
+        android:textSize="14sp"
+>>>>>>> d1b255f2ee8a88f2a386e407553958a525ed0b6e
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+<<<<<<< HEAD
         app:layout_constraintVertical_bias="0.6"
         app:layout_constraintHorizontal_bias="0.20"
         android:textColor="#fff" />
+=======
+        app:layout_constraintVertical_bias="0.38"
+        app:layout_constraintHorizontal_bias="0.35"
+        android:textColor="#0c4370" />
+>>>>>>> d1b255f2ee8a88f2a386e407553958a525ed0b6e
 
     <Button
         android:id="@+id/canvas"
         android:layout_width="60dip"
         android:layout_height="60dip"
+<<<<<<< HEAD
         app:layout_constraintHorizontal_bias="0.8"
         app:layout_constraintVertical_bias="0.5"
+=======
+        app:layout_constraintHorizontal_bias="0.65"
+        app:layout_constraintVertical_bias="0.28"
+>>>>>>> d1b255f2ee8a88f2a386e407553958a525ed0b6e
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
@@ -90,6 +127,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Canvas"
+<<<<<<< HEAD
         android:textSize="14dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -105,10 +143,14 @@
         android:layout_height="60dip"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintVertical_bias="0.5"
+=======
+        android:textSize="14sp"
+>>>>>>> d1b255f2ee8a88f2a386e407553958a525ed0b6e
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+<<<<<<< HEAD
         android:background="@drawable/textb"
         android:onClick="checkLoginTexting" />
 
@@ -125,6 +167,11 @@
         app:layout_constraintVertical_bias="0.6"
         app:layout_constraintHorizontal_bias="0.5"
         android:textColor="#fff" />
+=======
+        app:layout_constraintVertical_bias="0.38"
+        app:layout_constraintHorizontal_bias="0.65"
+        android:textColor="#0c4370" />
+>>>>>>> d1b255f2ee8a88f2a386e407553958a525ed0b6e
 
 
 

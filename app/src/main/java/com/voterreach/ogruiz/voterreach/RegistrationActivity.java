@@ -93,7 +93,11 @@ public class RegistrationActivity extends AppCompatActivity{
             try {
 
                 // Enter URL address where your php file resides
+<<<<<<< HEAD
                 url = new URL( "https://voterreach.org/manager/cgi-bin/app/register.php");
+=======
+                url = new URL( "https://voterreach.org/cgi-bin/register.php");
+>>>>>>> d1b255f2ee8a88f2a386e407553958a525ed0b6e
 
             } catch (MalformedURLException e) {
                 // TODO Auto-generated catch block
@@ -175,15 +179,22 @@ public class RegistrationActivity extends AppCompatActivity{
 
             pdLoading.dismiss();
 
+<<<<<<< HEAD
             System.out.println(result);
 
             if(result.equalsIgnoreCase("true"))
+=======
+            if(result.equalsIgnoreCase("\uFEFFtrue"))
+>>>>>>> d1b255f2ee8a88f2a386e407553958a525ed0b6e
             {
                 /* Here launching another activity when login successful. If you persist login state
                 use sharedPreferences of Android. and logout button to clear sharedPreferences.*/
 
+<<<<<<< HEAD
                 System.out.println(result);
 
+=======
+>>>>>>> d1b255f2ee8a88f2a386e407553958a525ed0b6e
                 SharedPreferences.Editor edit = prefs.edit();
                 edit.putBoolean(getString(R.string.pref_previously_started), Boolean.TRUE);
                 edit.putString(getString(R.string.pref_pbuuid), uniqueid);
@@ -193,7 +204,11 @@ public class RegistrationActivity extends AppCompatActivity{
                 startActivity(intent);
                 RegistrationActivity.this.finish();
             }
+<<<<<<< HEAD
             else if (result.equalsIgnoreCase("false")){
+=======
+            else if (result.equalsIgnoreCase("\uFEFFfalse")){
+>>>>>>> d1b255f2ee8a88f2a386e407553958a525ed0b6e
 
                 Toast.makeText(RegistrationActivity.this, "You connected but there was an issue with the database.", Toast.LENGTH_LONG).show();
 

@@ -14,16 +14,29 @@
         android:orientation="vertical"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
+<<<<<<< HEAD
         android:background="@color/background">
     </RelativeLayout>
 
     <ScrollView
         android:layout_width="300dp"
         android:layout_height="wrap_content"
+=======
+        android:background="@drawable/background_chalk">
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/phonebank"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Choose an Activity: "
+        android:textSize="20sp"
+>>>>>>> d1b255f2ee8a88f2a386e407553958a525ed0b6e
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+<<<<<<< HEAD
         app:layout_constraintVertical_bias="0.5"
         app:layout_constraintHorizontal_bias="0.5"
         tools:layout_editor_absoluteX="80dp"
@@ -42,5 +55,101 @@
             android:orientation="vertical" />
 
     </ScrollView>
+=======
+        app:layout_constraintVertical_bias="0.05"
+        app:layout_constraintHorizontal_bias="0.5"
+        android:textColor="#000" />
+
+    <Button
+        android:id="@+id/ab1"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.15"
+        android:background="@drawable/activity_buttons"
+        android:onClick="first_activity"
+        android:visibility="gone"
+        android:textColor="#fdfdfd"
+        android:textAllCaps="false" />
+
+    <Button
+        android:id="@+id/ab2"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias=".30"
+        android:background="@drawable/activity_buttons"
+        android:onClick="second_activity"
+        android:visibility="gone"
+        android:textColor="#fdfdfd"
+        android:textAllCaps="false"/>
+
+    <Button
+        android:id="@+id/ab3"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias=".45"
+        android:background="@drawable/activity_buttons"
+        android:onClick="third_activity"
+        android:visibility="gone"
+        android:textColor="#fdfdfd"
+        android:textAllCaps="false"/>
+
+    <Button
+        android:id="@+id/ab4"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias=".60"
+        android:background="@drawable/activity_buttons"
+        android:onClick="fourth_activity"
+        android:visibility="gone"
+        android:textColor="#fdfdfd"
+        android:textAllCaps="false"/>
+
+    <Button
+        android:id="@+id/ab5"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias=".75"
+        android:background="@drawable/activity_buttons"
+        android:onClick="fifth_activity"
+        android:visibility="gone"
+        android:textColor="#fdfdfd"
+        android:textAllCaps="false"/>
+
+    <Button
+        android:id="@+id/ab6"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias=".90"
+        android:background="@drawable/activity_buttons"
+        android:onClick="sixth_activity"
+        android:visibility="gone"
+        android:textColor="#fdfdfd"
+        android:textAllCaps="false"/>
+
+>>>>>>> d1b255f2ee8a88f2a386e407553958a525ed0b6e
 
 </android.support.constraint.ConstraintLayout>

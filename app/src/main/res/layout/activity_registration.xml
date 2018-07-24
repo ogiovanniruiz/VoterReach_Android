@@ -11,11 +11,25 @@
         android:orientation="vertical"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
+<<<<<<< HEAD
         android:background="@color/background">
     </RelativeLayout>
 
 
 
+=======
+        android:background="@drawable/background_chalk">
+    </RelativeLayout>
+
+
+    <ImageView
+        android:id="@+id/imageLogo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="50dp"
+        app:srcCompat="@drawable/phlogo"/>
+>>>>>>> d1b255f2ee8a88f2a386e407553958a525ed0b6e
     
     <EditText
         android:layout_width="300dp"

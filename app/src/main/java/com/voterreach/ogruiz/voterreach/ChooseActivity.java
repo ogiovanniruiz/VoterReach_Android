@@ -7,6 +7,7 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+<<<<<<< HEAD
 import android.provider.CalendarContract;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Gravity;
@@ -16,6 +17,12 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+=======
+import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+>>>>>>> d1b255f2ee8a88f2a386e407553958a525ed0b6e
 import android.widget.Toast;
 
 import java.io.BufferedReader;
@@ -48,7 +55,11 @@ public class ChooseActivity extends AppCompatActivity{
 
         prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
 
+<<<<<<< HEAD
         code = prefs.getString(getString(R.string.pref_code), "DEFAULT");
+=======
+        code = prefs.getString("Code", "DEFAULT");
+>>>>>>> d1b255f2ee8a88f2a386e407553958a525ed0b6e
         mode = prefs.getString("Mode", "DEFAULT");
         String activities_string = prefs.getString("Activities", "DEFAULT");
 
@@ -56,6 +67,7 @@ public class ChooseActivity extends AppCompatActivity{
         activities = activities_string.split(delims);
 
         Button[] buttons = new Button[activities.length];
+<<<<<<< HEAD
 
         LinearLayout ll = (LinearLayout)findViewById(R.id.linearLayout1);
         LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
@@ -95,6 +107,67 @@ public class ChooseActivity extends AppCompatActivity{
         }
     }
 
+=======
+        final int BID= R.id.ab1;
+
+        for (int i = 0; i < activities.length; i = i + 1){
+            buttons[i] = (Button) findViewById(BID + i);
+            buttons[i].setVisibility(View.VISIBLE);
+            buttons[i].setText(activities[i]);
+
+        }
+    }
+
+
+    // Triggers when LOGIN Button clicked
+    public void first_activity(View arg0) {
+
+        activity = activities[0];
+
+        new AsyncLogin().execute(code, activity);
+
+    }
+
+    // Triggers when LOGIN Button clicked
+    public void second_activity(View arg0) {
+
+        activity = activities[1];
+        new AsyncLogin().execute(code, activity);
+
+    }
+
+    // Triggers when LOGIN Button clicked
+    public void third_activity(View arg0) {
+
+        activity = activities[2];
+        new AsyncLogin().execute(code, activity);
+
+    }
+
+    // Triggers when LOGIN Button clicked
+    public void fourth_activity(View arg0) {
+
+        activity = activities[3];
+        new AsyncLogin().execute(code, activity);
+
+    }
+
+    // Triggers when LOGIN Button clicked
+    public void fifth_activity(View arg0) {
+
+        activity = activities[4];
+        new AsyncLogin().execute(code, activity);
+
+    }
+
+    // Triggers when LOGIN Button clicked
+    public void sixth_activity(View arg0) {
+
+        activity = activities[5];
+        new AsyncLogin().execute(code, activity);
+
+    }
+>>>>>>> d1b255f2ee8a88f2a386e407553958a525ed0b6e
 
     private class AsyncLogin extends AsyncTask<String, String, String>
     {
@@ -118,7 +191,11 @@ public class ChooseActivity extends AppCompatActivity{
             try {
 
                 // Enter URL address where your php file resides
+<<<<<<< HEAD
                 url = new URL("https://voterreach.org/manager/cgi-bin/app/activity.php");
+=======
+                url = new URL("https://voterreach.org/cgi-bin/activity.php");
+>>>>>>> d1b255f2ee8a88f2a386e407553958a525ed0b6e
 
             } catch (MalformedURLException e) {
                 // TODO Auto-generated catch block
@@ -201,10 +278,16 @@ public class ChooseActivity extends AppCompatActivity{
             pdLoading.dismiss();
 
             String delims = "[,]";
+<<<<<<< HEAD
 
             String[] response = result.split(delims);
 
             if (result.equalsIgnoreCase("false")){
+=======
+            String[] response = result.split(delims);
+
+            if (result.equalsIgnoreCase("\uFEFFfalse")){
+>>>>>>> d1b255f2ee8a88f2a386e407553958a525ed0b6e
 
                 // If username and password does not match display a error message
                 Toast.makeText(ChooseActivity.this, "You have connected but have an invalid Campaign Code.", Toast.LENGTH_LONG).show();
@@ -214,6 +297,7 @@ public class ChooseActivity extends AppCompatActivity{
             {
                 Toast.makeText(ChooseActivity.this, "Connection is slow. Please try again in a few seconds.", Toast.LENGTH_LONG).show();
             }
+<<<<<<< HEAD
             else if (response[0].equalsIgnoreCase("true")){
 
                 String questions = response[1] + "," + response[2] + "," + response[3] + "," + response[4] + "," + response[5];
@@ -221,6 +305,15 @@ public class ChooseActivity extends AppCompatActivity{
                 String script_link = response[6];
 
                 String response_types = response[7] + "," + response[8] + "," + response[9] +"," + response[10]+"," + response[11];
+=======
+            else if (response[0].equalsIgnoreCase("\uFEFFtrue")){
+
+                String questions = response[1] + "," + response[2] + "," + response[3] +"," + response[4];
+
+                String script_link = response[5];
+
+                String response_types = response[6] + "," + response[7] + "," + response[8] +"," + response[9];
+>>>>>>> d1b255f2ee8a88f2a386e407553958a525ed0b6e
 
                 Intent intent;
 
@@ -232,10 +325,13 @@ public class ChooseActivity extends AppCompatActivity{
 
                     intent = new Intent(ChooseActivity.this,CallActivity.class);
                     startActivity(intent);
+<<<<<<< HEAD
                 }else if (mode.equalsIgnoreCase("texting")){
 
                     intent = new Intent(ChooseActivity.this,TextActivity.class);
                     startActivity(intent);
+=======
+>>>>>>> d1b255f2ee8a88f2a386e407553958a525ed0b6e
                 }
 
                 SharedPreferences.Editor edit = prefs.edit();

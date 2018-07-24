@@ -6,8 +6,13 @@ android {
         applicationId "com.voterreach.ogruiz.voterreach"
         minSdkVersion 15
         targetSdkVersion 26
+<<<<<<< HEAD
         versionCode 50
         versionName "1.12"
+=======
+        versionCode 27
+        versionName "0.89"
+>>>>>>> d1b255f2ee8a88f2a386e407553958a525ed0b6e
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -26,6 +31,7 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
+<<<<<<< HEAD
     implementation 'com.wefika:horizontal-picker:1.1.1'
     implementation 'com.google.android.gms:play-services-maps:11.8.0'
     implementation 'com.google.android.gms:play-services-location:11.8.0'
@@ -34,5 +40,10 @@ dependencies {
         implementation 'com.google.maps.android:android-maps-utils:0.4'
     }
 
+=======
+    compile 'com.wefika:horizontal-picker:1.1.1'
+    compile 'com.google.android.gms:play-services-maps:11.8.0'
+    compile 'com.google.android.gms:play-services-location:11.8.0'
+>>>>>>> d1b255f2ee8a88f2a386e407553958a525ed0b6e
 
 }

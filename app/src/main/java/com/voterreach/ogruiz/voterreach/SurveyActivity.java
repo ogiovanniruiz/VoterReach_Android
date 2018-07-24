@@ -1,20 +1,35 @@
 package com.voterreach.ogruiz.voterreach;
 
+<<<<<<< HEAD
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+=======
+import android.app.ProgressDialog;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
+>>>>>>> d1b255f2ee8a88f2a386e407553958a525ed0b6e
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
+<<<<<<< HEAD
 import android.telephony.PhoneStateListener;
 import android.telephony.TelephonyManager;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.EditText;
+=======
+import android.view.View;
+import android.widget.EditText;
+import android.widget.ImageView;
+>>>>>>> d1b255f2ee8a88f2a386e407553958a525ed0b6e
 import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -42,7 +57,11 @@ public class SurveyActivity extends AppCompatActivity{
     public static final int CONNECTION_TIMEOUT=10000;
     public static final int READ_TIMEOUT=15000;
 
+<<<<<<< HEAD
     private String[] a = {"N","N","N","N","N"};
+=======
+    private String[] a = {"N","N","N","N"};
+>>>>>>> d1b255f2ee8a88f2a386e407553958a525ed0b6e
     private String noAnswer = "N";
     private String badNumber = "N";
     private String voter_id;
@@ -51,6 +70,7 @@ public class SurveyActivity extends AppCompatActivity{
     private SeekBar[] seekers;
     private EditText[] text_answers;
     private TextView[] seekText;
+<<<<<<< HEAD
 
     private String campaigncode;
     private String mode;
@@ -61,6 +81,14 @@ public class SurveyActivity extends AppCompatActivity{
     private ToggleButton buttons[];
 
     private String fullname;
+=======
+    private ToggleButton[] buttons;
+    private String campaigncode;
+    private String mode;
+    private String activity;
+
+    private String pbuuid;
+>>>>>>> d1b255f2ee8a88f2a386e407553958a525ed0b6e
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,7 +99,11 @@ public class SurveyActivity extends AppCompatActivity{
         String questions = prefs.getString("Questions", "DEFAULT");
         String response_types = prefs.getString("Response_Type", "DEFAULT");
 
+<<<<<<< HEAD
         campaigncode = prefs.getString(getString(R.string.pref_code), "DEFAULT");
+=======
+        campaigncode = prefs.getString("Code", "DEFAULT");
+>>>>>>> d1b255f2ee8a88f2a386e407553958a525ed0b6e
         pbuuid = prefs.getString(getString(R.string.pref_pbuuid), "DEFAULT");
         mode = prefs.getString("Mode", "DEFAULT");
         activity = prefs.getString("Activities", "DEFAULT");
@@ -86,6 +118,7 @@ public class SurveyActivity extends AppCompatActivity{
         seekText = new TextView[question.length];
         text_answers = new EditText[question.length];
 
+<<<<<<< HEAD
         noButton = (ToggleButton) findViewById(R.id.no);
 
         badButton = (ToggleButton) findViewById(R.id.bad);
@@ -101,6 +134,8 @@ public class SurveyActivity extends AppCompatActivity{
         }
 
 
+=======
+>>>>>>> d1b255f2ee8a88f2a386e407553958a525ed0b6e
         final int BID= R.id.b1;
         final int SID= R.id.s1;
         final int QID = R.id.st1;
@@ -136,6 +171,10 @@ public class SurveyActivity extends AppCompatActivity{
                             scale_text = question[x] + ": " + String.valueOf(progress);
                         }
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> d1b255f2ee8a88f2a386e407553958a525ed0b6e
                         seekText[x].setText(scale_text);
 
                     }
@@ -161,6 +200,10 @@ public class SurveyActivity extends AppCompatActivity{
 
                 buttons[i] = (ToggleButton) findViewById(BID + i);
                 buttons[i].setText(question[i]);
+<<<<<<< HEAD
+=======
+                buttons[i].setPadding(15, 0, 15, 0);
+>>>>>>> d1b255f2ee8a88f2a386e407553958a525ed0b6e
                 buttons[i].setTextOn(null);
                 buttons[i].setTextOff(null);
                 buttons[i].setVisibility(View.VISIBLE);
@@ -171,11 +214,16 @@ public class SurveyActivity extends AppCompatActivity{
 
         voter_id = prefs.getString(getString(R.string.pref_voterid), "DEFAULT");
 
+<<<<<<< HEAD
         fullname = "Responses for "+ prefs.getString("FullName", "DEFAULT") + ":";
+=======
+        String fullname = "Responses for "+ prefs.getString("FullName", "DEFAULT") + ":";
+>>>>>>> d1b255f2ee8a88f2a386e407553958a525ed0b6e
 
         final TextView voterNameTextView = (TextView) findViewById(R.id.voterName);
         voterNameTextView.setText(fullname);
 
+<<<<<<< HEAD
         if (mode.equalsIgnoreCase("phonebank")) {
 
             String prepare = "Calling " + prefs.getString("FullName", "DEFAULT");
@@ -185,6 +233,8 @@ public class SurveyActivity extends AppCompatActivity{
 
 
 
+=======
+>>>>>>> d1b255f2ee8a88f2a386e407553958a525ed0b6e
     }
 
 
@@ -194,12 +244,18 @@ public class SurveyActivity extends AppCompatActivity{
         if (a[0].equals("Y")) {
 
             a[0] = "N";
+<<<<<<< HEAD
 
+=======
+>>>>>>> d1b255f2ee8a88f2a386e407553958a525ed0b6e
         }
         else
         {
             a[0] = "Y";
+<<<<<<< HEAD
 
+=======
+>>>>>>> d1b255f2ee8a88f2a386e407553958a525ed0b6e
         }
     }
 
@@ -209,13 +265,19 @@ public class SurveyActivity extends AppCompatActivity{
 
 
             a[1] = "N";
+<<<<<<< HEAD
 
+=======
+>>>>>>> d1b255f2ee8a88f2a386e407553958a525ed0b6e
         }
         else
         {
 
             a[1] = "Y";
+<<<<<<< HEAD
 
+=======
+>>>>>>> d1b255f2ee8a88f2a386e407553958a525ed0b6e
         }
     }
 
@@ -226,14 +288,20 @@ public class SurveyActivity extends AppCompatActivity{
         if (a[2].equals("Y")) {
 
             a[2]= "N";
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> d1b255f2ee8a88f2a386e407553958a525ed0b6e
         }
         else
         {
 
             a[2] = "Y";
+<<<<<<< HEAD
 
+=======
+>>>>>>> d1b255f2ee8a88f2a386e407553958a525ed0b6e
         }
     }
 
@@ -243,11 +311,15 @@ public class SurveyActivity extends AppCompatActivity{
 
         if (a[3].equals("Y")) {
             a[3] = "N";
+<<<<<<< HEAD
 
+=======
+>>>>>>> d1b255f2ee8a88f2a386e407553958a525ed0b6e
         }
         else
         {
             a[3] = "Y";
+<<<<<<< HEAD
 
         }
     }
@@ -264,11 +336,14 @@ public class SurveyActivity extends AppCompatActivity{
         {
             a[4] = "Y";
 
+=======
+>>>>>>> d1b255f2ee8a88f2a386e407553958a525ed0b6e
         }
     }
 
     public void noAnswer(View arg0) {
 
+<<<<<<< HEAD
         if (mode.equalsIgnoreCase("phonebank")) {
 
             noButton.setText("No Answer");
@@ -288,11 +363,25 @@ public class SurveyActivity extends AppCompatActivity{
             noAnswer = "Y";
 
 
+=======
+        Button button = (Button)findViewById(R.id.noAnswer);
+
+        if (noAnswer.equals("Y")) {
+
+            button.setBackgroundResource(R.drawable.noanswer);
+            noAnswer = "N";
+        }
+        else
+        {
+            button.setBackgroundResource(R.drawable.noanswerblue);
+            noAnswer = "Y";
+>>>>>>> d1b255f2ee8a88f2a386e407553958a525ed0b6e
         }
     }
 
     public void badNumber(View arg0) {
 
+<<<<<<< HEAD
         if (mode.equalsIgnoreCase("phonebank")) {
             badButton.setText("Bad Number");
         }else{
@@ -308,6 +397,19 @@ public class SurveyActivity extends AppCompatActivity{
 
             badNumber = "Y";
 
+=======
+        Button button = (ToggleButton)findViewById(R.id.badNumber);
+
+        if (badNumber.equals("Y")) {
+            button.setBackgroundResource(R.drawable.bad);
+            badNumber = "N";
+        }
+        else
+        {
+            button.setTextColor(Color.parseColor("#fdfdfd"));
+            button.setBackgroundResource(R.drawable.badblue);
+            badNumber = "Y";
+>>>>>>> d1b255f2ee8a88f2a386e407553958a525ed0b6e
         }
     }
 
@@ -321,9 +423,12 @@ public class SurveyActivity extends AppCompatActivity{
         }else if (mode.equals("canvas")) {
             Intent intent = new Intent(SurveyActivity.this, CanvasActivity.class);
             startActivity(intent);
+<<<<<<< HEAD
         }else if (mode.equals("texting")) {
             Intent intent = new Intent(SurveyActivity.this, SearchActivity.class);
             startActivity(intent);
+=======
+>>>>>>> d1b255f2ee8a88f2a386e407553958a525ed0b6e
         }
 
         SurveyActivity.this.finish();
@@ -336,6 +441,7 @@ public class SurveyActivity extends AppCompatActivity{
 
         for (int i = 0; i < question.length; i = i + 1) {
             if (type[i].equals("s")) {
+<<<<<<< HEAD
 
                 a[i] = valueOf(seekers[i].getProgress());
                 //if (seekers[i].getProgress() == 0){
@@ -348,6 +454,17 @@ public class SurveyActivity extends AppCompatActivity{
             }else if (type[i].equals("t")){
                 a[i] = text_answers[i].getText().toString().replace("0", "").replace("'", "");
                 //a[i] = text_answers[i].getText().toString();
+=======
+                if (seekers[i].getProgress() == 0){
+
+                    a[i] = "";
+
+                }else {
+                    a[i] = valueOf(seekers[i].getProgress());
+                }
+            }else if (type[i].equals("t")){
+                a[i] = text_answers[i].getText().toString();
+>>>>>>> d1b255f2ee8a88f2a386e407553958a525ed0b6e
 
             }
         }
@@ -367,6 +484,7 @@ public class SurveyActivity extends AppCompatActivity{
             Toast.makeText(SurveyActivity.this, "Invalid Survey Response.", Toast.LENGTH_LONG).show();
 
         }
+<<<<<<< HEAD
 
         else if ((Arrays.asList(question).contains("Refused") || Arrays.asList(question).contains("Spanish"))){
 
@@ -383,6 +501,10 @@ public class SurveyActivity extends AppCompatActivity{
     }
         else{
             new SaveData().execute(a[0], a[1], a[2], a[3], a[4],noAnswer, badNumber, voter_id, dateTime, campaigncode, pbuuid, mode, activity);
+=======
+        else{
+            new SaveData().execute(a[0], a[1], a[2], a[3], noAnswer, badNumber, voter_id, dateTime, campaigncode, pbuuid, mode, activity);
+>>>>>>> d1b255f2ee8a88f2a386e407553958a525ed0b6e
         }
     }
 
@@ -406,7 +528,11 @@ public class SurveyActivity extends AppCompatActivity{
             try {
 
                 // Enter URL address where your php file resides
+<<<<<<< HEAD
                 url = new URL("https://voterreach.org/manager/cgi-bin/app/survey.php");
+=======
+                url = new URL("https://voterreach.org/cgi-bin/survey.php");
+>>>>>>> d1b255f2ee8a88f2a386e407553958a525ed0b6e
 
             } catch (MalformedURLException e) {
                 // TODO Auto-generated catch block
@@ -432,6 +558,7 @@ public class SurveyActivity extends AppCompatActivity{
                         .appendQueryParameter("a2", params[1])
                         .appendQueryParameter("a3", params[2])
                         .appendQueryParameter("a4", params[3])
+<<<<<<< HEAD
                         .appendQueryParameter("a5", params[4])
                         .appendQueryParameter("no", params[5])
                         .appendQueryParameter("bad", params[6])
@@ -441,6 +568,16 @@ public class SurveyActivity extends AppCompatActivity{
                         .appendQueryParameter("pbuuid", params[10])
                         .appendQueryParameter("mode", params[11])
                         .appendQueryParameter("activity", params[12]);
+=======
+                        .appendQueryParameter("no", params[4])
+                        .appendQueryParameter("bad", params[5])
+                        .appendQueryParameter("voteruuid", params[6])
+                        .appendQueryParameter("calldate", params[7])
+                        .appendQueryParameter("campaigncode", params[8])
+                        .appendQueryParameter("pbuuid", params[9])
+                        .appendQueryParameter("mode", params[10])
+                        .appendQueryParameter("activity", params[11]);
+>>>>>>> d1b255f2ee8a88f2a386e407553958a525ed0b6e
 
                 String query = builder.build().getEncodedQuery();
 
@@ -498,7 +635,11 @@ public class SurveyActivity extends AppCompatActivity{
         protected void onPostExecute(String result){
             pdLoading.dismiss();
 
+<<<<<<< HEAD
             if(result.equalsIgnoreCase("true")) {
+=======
+            if(result.equalsIgnoreCase("\uFEFFtrue")) {
+>>>>>>> d1b255f2ee8a88f2a386e407553958a525ed0b6e
 
                 if (mode.equals("phonebank")) {
 
@@ -510,11 +651,14 @@ public class SurveyActivity extends AppCompatActivity{
                     Intent intent = new Intent(SurveyActivity.this, CanvasActivity.class);
                     startActivity(intent);
                     SurveyActivity.this.finish();
+<<<<<<< HEAD
                 }else if (mode.equals("texting")){
 
                     Intent intent = new Intent(SurveyActivity.this, SearchActivity.class);
                     startActivity(intent);
                     SurveyActivity.this.finish();
+=======
+>>>>>>> d1b255f2ee8a88f2a386e407553958a525ed0b6e
                 }
             }
 
@@ -523,7 +667,11 @@ public class SurveyActivity extends AppCompatActivity{
                 Toast.makeText(SurveyActivity.this, "Connection is slow. Please try again in a few seconds.", Toast.LENGTH_LONG).show();
             }
         }
+<<<<<<< HEAD
 
     }
 
+=======
+    }
+>>>>>>> d1b255f2ee8a88f2a386e407553958a525ed0b6e
 }
