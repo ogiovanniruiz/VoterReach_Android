@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context="com.voterreach.ogruiz.voterreach.SearchActivity">
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/rootRL"
+        android:orientation="vertical"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:background="@color/background">
+    </RelativeLayout>
+
+    <EditText
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:ems="10"
+        android:id="@+id/search"
+        android:layout_below="@+id/button"
+        android:hint="Search by Phone Number"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="80dp"
+        android:background="#ffffff"  />
+
+    <Button
+
+        android:id="@+id/button"
+        android:layout_width="120dip"
+        android:layout_height="120dip"
+        android:layout_below="@+id/imageLogo"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="80dp"
+        android:background="@drawable/searchflag"
+        android:onClick="checkLogin" />
+
+    <Button
+        android:id="@+id/ExitButton"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/search"
+        android:layout_marginTop="80dp"
+        android:background="@drawable/exit"
+        android:onClick="ExitButton"
+        android:layout_width="60dip"
+        android:layout_height="60dip"/>
+
+    <TextView
+        android:id="@+id/exit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Exit"
+        android:textSize="14dp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/ExitButton"
+        android:layout_marginTop="10dp"
+        android:textColor="@color/call_text" />
+
+</RelativeLayout>

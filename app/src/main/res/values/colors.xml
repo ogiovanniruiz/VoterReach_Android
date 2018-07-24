@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#ac2000</color>
+    <color name="colorPrimaryDark">#0c4370</color>
+    <color name="colorAccent">#ac2000</color>
+
+    <color name="survey_text">#fff</color>
+    <color name="call_text">#fff</color>
+    <color name="background">#222</color>
+</resources>
