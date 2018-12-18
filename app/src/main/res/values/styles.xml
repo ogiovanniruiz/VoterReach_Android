@@ -36,12 +36,9 @@
         <item name="android:background">#f1f1f1</item>
     </style>
 
-<<<<<<< HEAD
     <style name="iconGenText">
         <item name="android:textSize">14sp</item>
         <item name="android:textColor">#ffffff</item>
     </style>
 
-=======
->>>>>>> d1b255f2ee8a88f2a386e407553958a525ed0b6e
 </resources>

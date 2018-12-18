@@ -2,7 +2,6 @@ package com.voterreach.ogruiz.voterreach;
 
 import android.Manifest;
 import android.annotation.TargetApi;
-<<<<<<< HEAD
 import android.app.AlertDialog;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
@@ -10,25 +9,17 @@ import android.app.PendingIntent;
 import android.app.ProgressDialog;
 import android.content.ContentValues;
 import android.content.Context;
-=======
-import android.app.ProgressDialog;
-import android.content.ContentValues;
->>>>>>> d1b255f2ee8a88f2a386e407553958a525ed0b6e
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.AsyncTask;
 
-<<<<<<< HEAD
 import android.os.Build;
-=======
->>>>>>> d1b255f2ee8a88f2a386e407553958a525ed0b6e
 import android.os.Bundle;
 import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.provider.BlockedNumberContract;
-<<<<<<< HEAD
 import android.provider.ContactsContract;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
@@ -38,11 +29,6 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.telephony.PhoneStateListener;
 import android.telephony.TelephonyManager;
-=======
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AppCompatActivity;
->>>>>>> d1b255f2ee8a88f2a386e407553958a525ed0b6e
 import android.view.View;
 
 
@@ -73,10 +59,7 @@ public class CallActivity extends AppCompatActivity{
     private String voterid;
     private SharedPreferences prefs;
     private String voterphonenumber;
-<<<<<<< HEAD
     private String fullname;
-=======
->>>>>>> d1b255f2ee8a88f2a386e407553958a525ed0b6e
     private String script_link;
 
     @Override
@@ -96,28 +79,10 @@ public class CallActivity extends AppCompatActivity{
 
     public void ExitButton(View arg0) {
 
-<<<<<<< HEAD
         //your code when back button pressed
         Intent intent = new Intent(CallActivity.this, LoginActivity.class);
         startActivity(intent);
         CallActivity.this.finish();
-=======
-        final ProgressDialog exiting = new ProgressDialog(CallActivity.this);
-
-        //this method will be running on UI thread
-        exiting.setMessage("Voter Reach is Shutting Down. Thank you for your help!");
-        exiting.setCancelable(false);
-        exiting.show();
-
-        Handler handler = new Handler();
-        handler.postDelayed(new Runnable() {
-            public void run() {
-                exiting.dismiss();
-                finish();
-                System.exit(0);
-            }
-        }, 2000);
->>>>>>> d1b255f2ee8a88f2a386e407553958a525ed0b6e
     }
 
     @Override
@@ -151,11 +116,7 @@ public class CallActivity extends AppCompatActivity{
             try {
 
                 // Enter URL address where your php file resides
-<<<<<<< HEAD
                 url = new URL("https://voterreach.org/manager/cgi-bin/app/call.php");
-=======
-                url = new URL("https://voterreach.org/cgi-bin/call.php");
->>>>>>> d1b255f2ee8a88f2a386e407553958a525ed0b6e
 
             } catch (MalformedURLException e) {
                 // TODO Auto-generated catch block
@@ -237,18 +198,12 @@ public class CallActivity extends AppCompatActivity{
 
             pdLoading.dismiss();
 
-<<<<<<< HEAD
             if (result.equalsIgnoreCase("false")){
 
                 Toast.makeText(CallActivity.this, "All voters have been called.", Toast.LENGTH_LONG).show();
                 Intent intent = new Intent(CallActivity.this, LoginActivity.class);
                 startActivity(intent);
                 CallActivity.this.finish();
-=======
-            if (result.equalsIgnoreCase("\uFEFFfalse")){
-
-                Toast.makeText(CallActivity.this, "Could not Retrieve Voter Data.", Toast.LENGTH_LONG).show();
->>>>>>> d1b255f2ee8a88f2a386e407553958a525ed0b6e
 
             }
 
@@ -261,7 +216,6 @@ public class CallActivity extends AppCompatActivity{
                 final TextView callernumberTextView = (TextView) findViewById(R.id.numbercalls);
                 final TextView totalcallsTextView = (TextView) findViewById(R.id.totalcalls);
 
-<<<<<<< HEAD
                 final TextView voterCityTextView = (TextView) findViewById(R.id.voterCity);
                 final TextView voterPartyTextView = (TextView) findViewById(R.id.voterParty);
                 final TextView voterAgeTextView = (TextView) findViewById(R.id.voterAge);
@@ -303,27 +257,6 @@ public class CallActivity extends AppCompatActivity{
                     CallActivity.this.finish();
 
                 }
-=======
-                String fullname = voter_data[0] + " " + voter_data[1];
-
-                voterNameTextView.setText(fullname);
-
-                voterphonenumber = voter_data[2];
-
-                voterid = voter_data[3];
-
-                String feedback = "You have made " + voter_data[4] + " calls.";
-
-                String total_feedback = "The campaign has made " + voter_data[5] + " total calls.";
-
-                callernumberTextView.setText(feedback);
-
-                totalcallsTextView.setText(total_feedback);
-
-                SharedPreferences.Editor edit = prefs.edit();
-                edit.putString("FullName", fullname);
-                edit.apply();
->>>>>>> d1b255f2ee8a88f2a386e407553958a525ed0b6e
             }
 
         }
@@ -346,7 +279,6 @@ public class CallActivity extends AppCompatActivity{
             edit.putString(getString(R.string.pref_voterid), voterid);
             edit.apply();
 
-<<<<<<< HEAD
             if (ContextCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
 
                 ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CALL_PHONE}, 1234);
@@ -361,20 +293,11 @@ public class CallActivity extends AppCompatActivity{
                 Toast.makeText(CallActivity.this, prepare, Toast.LENGTH_LONG).show();
                 CallActivity.this.finish();
             }
-=======
-            Intent intent = new Intent(CallActivity.this,SurveyActivity.class);
-            startActivity(intent);
-
-            startActivity(new Intent(Intent.ACTION_DIAL, Uri.fromParts("tel", voterphonenumber, null)));
-            CallActivity.this.finish();
-
->>>>>>> d1b255f2ee8a88f2a386e407553958a525ed0b6e
 
         }
 
     }
 
-<<<<<<< HEAD
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String permissions[], @NonNull int[] grantResults) {
         switch (requestCode) {
@@ -405,11 +328,6 @@ public class CallActivity extends AppCompatActivity{
 
         Toast.makeText(CallActivity.this, redirect, Toast.LENGTH_LONG).show();
 
-=======
-    // Triggers when LOGIN Button clicked
-    public void ScriptButton(View arg0) {
-
->>>>>>> d1b255f2ee8a88f2a386e407553958a525ed0b6e
         Intent openURL = new Intent(android.content.Intent.ACTION_VIEW);
         openURL.setData(Uri.parse(script_link));
         startActivity(openURL);
@@ -418,8 +336,5 @@ public class CallActivity extends AppCompatActivity{
     }
 
 }
-<<<<<<< HEAD
 
 
-=======
->>>>>>> d1b255f2ee8a88f2a386e407553958a525ed0b6e

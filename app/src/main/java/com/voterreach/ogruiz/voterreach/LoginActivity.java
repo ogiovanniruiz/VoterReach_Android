@@ -54,11 +54,7 @@ public class LoginActivity extends AppCompatActivity{
         final String id = uniqueid;
 
         SharedPreferences.Editor edit = prefs.edit();
-<<<<<<< HEAD
         edit.putString(getString(R.string.pref_code), code);
-=======
-        edit.putString("Code", code);
->>>>>>> d1b255f2ee8a88f2a386e407553958a525ed0b6e
         edit.apply();
 
         mode = "phonebank";
@@ -75,11 +71,7 @@ public class LoginActivity extends AppCompatActivity{
         final String id = uniqueid;
 
         SharedPreferences.Editor edit = prefs.edit();
-<<<<<<< HEAD
         edit.putString(getString(R.string.pref_code), code);
-=======
-        edit.putString("Code", code);
->>>>>>> d1b255f2ee8a88f2a386e407553958a525ed0b6e
         edit.apply();
 
         mode = "canvas";
@@ -87,7 +79,6 @@ public class LoginActivity extends AppCompatActivity{
 
     }
 
-<<<<<<< HEAD
     // Triggers when LOGIN Button clicked
     public void checkLoginTexting(View arg0) {
         // Get text from user, password and Campaign Code fields.
@@ -103,8 +94,6 @@ public class LoginActivity extends AppCompatActivity{
 
     }
 
-=======
->>>>>>> d1b255f2ee8a88f2a386e407553958a525ed0b6e
     private class AsyncLogin extends AsyncTask<String, String, String>
     {
 
@@ -127,11 +116,7 @@ public class LoginActivity extends AppCompatActivity{
             try {
 
                 // Enter URL address where your php file resides
-<<<<<<< HEAD
                 url = new URL("https://voterreach.org/manager/cgi-bin/app/login.php");
-=======
-                url = new URL("https://voterreach.org/cgi-bin/login.php");
->>>>>>> d1b255f2ee8a88f2a386e407553958a525ed0b6e
 
             } catch (MalformedURLException e) {
                 // TODO Auto-generated catch block
@@ -217,11 +202,7 @@ public class LoginActivity extends AppCompatActivity{
             String delims = "[,]";
             String[] response = result.split(delims);
 
-<<<<<<< HEAD
             if (result.equalsIgnoreCase("false")){
-=======
-            if (result.equalsIgnoreCase("\uFEFFfalse")){
->>>>>>> d1b255f2ee8a88f2a386e407553958a525ed0b6e
 
                 // If username and password does not match display a error message
                 Toast.makeText(LoginActivity.this, "You have connected but have an invalid Campaign Code.", Toast.LENGTH_LONG).show();
@@ -232,7 +213,6 @@ public class LoginActivity extends AppCompatActivity{
                 Toast.makeText(LoginActivity.this, "Connection is slow. Please try again in a few seconds.", Toast.LENGTH_LONG).show();
             }
 
-<<<<<<< HEAD
             else if (result.equalsIgnoreCase("Blocked"))
             {
                 Toast.makeText(LoginActivity.this, "Could not login. Please contact your campaign manager.", Toast.LENGTH_LONG).show();
@@ -243,14 +223,6 @@ public class LoginActivity extends AppCompatActivity{
             }
 
             else if (response[0].equalsIgnoreCase("true")){
-=======
-            else if (result.equalsIgnoreCase("\uFEFFBlocked"))
-            {
-                Toast.makeText(LoginActivity.this, "Could not login. Please contact your campaign manager.", Toast.LENGTH_LONG).show();
-            }
-
-            else if (response[0].equalsIgnoreCase("\uFEFFtrue")){
->>>>>>> d1b255f2ee8a88f2a386e407553958a525ed0b6e
 
                 StringBuilder output = new StringBuilder("");
 
